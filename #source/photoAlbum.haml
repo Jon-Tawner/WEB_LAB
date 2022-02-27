@@ -1,0 +1,23 @@
+!!!
+%html{:lang => "ru"}
+  %head
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    %title Фотоальбом
+  %body
+    %header
+      %h1 Фотоальбом
+      =Haml::Engine.new(File.read('nav.haml')).render
+    
+    -# #BackGround-BigPhoto
+    -#   %button{:onclick => "prev()"} Prev
+    -#   %img#BigPhoto{:onclick => "BigPhotoOpen(false)"}/
+    -#   %button{:onclick => "next()"} Next
+    -# %section#album
+      -# .row
+      -#   .photo
+    =Haml::Engine.new(File.read('ShareScrp.haml')).render
+    %script{:src => "js\\photoAlbum.js"}
+    %script{:src => "https://unpkg.com/vue@next"}

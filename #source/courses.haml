@@ -1,0 +1,143 @@
+!!!
+%html{:lang => "ru"}
+  %head
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    %title Учёба
+  %body
+    %header
+      %h1 Моя Учёба
+      =Haml::Engine.new(File.read('nav.haml')).render
+      %nav#nav
+        %ul
+          %li
+            %a{:href => "test.html"} Тест по дисциплине Инженерная графика
+    %section
+      %h2 Полное название университета
+      %p
+        %b Полное название кафедры
+      %table
+        %caption Дисциплины на этот курс
+        %tr.head
+          %td{:rowspan => "3"}
+            %p №
+          %td.title{:rowspan => "3"}
+            %p Дисциплина
+          %td{:colspan => "12"}
+            %p Часов в неделю (Лекций, Лаб. раб, Практ. раб)
+        %tr.head
+          %td{:colspan => "6"}
+            %p 1 курс
+          %td{:colspan => "6"}
+            %p 2 курс
+        %tr.head
+          %td{:colspan => "3"}
+            %p 1 сем
+          %td{:colspan => "3"}
+            %p 2 сем
+          %td{:colspan => "3"}
+            %p 3 сем
+          %td{:colspan => "3"}
+            %p 4 сем
+        %tr
+          %td
+            %p 1
+          %td.title
+            %p Экология
+          - @row1 = [' ',' ',' ',' ',' ','1','0','1',' ',' ',' ',' ']
+          - @row1.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 2
+          %td.title
+            %p Высшая математика
+          - @row2 = ['3','0','3','3','0','3','2','1','2',' ',' ',' ']
+          - @row2.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 3
+          %td.title
+            %p Русский язык и культура речи
+          - @row3 = ['1','0','2',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+          - @row3.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 4
+          %td.title
+            %p Основы дискретной математики
+          - @row4 = ['2','0','1','3','0','2',' ',' ',' ',' ',' ',' ']
+          - @row4.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 5
+          %td.title
+            %p Основы программирования и алгоритмические языки
+          - @row5 = ['3','2','0','3','3','0','0','0',' ',' ',' ',' ']
+          - @row5.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 6
+          %td.title
+            %p Основы экономики
+          - @row6 = [' ',' ',' ',' ',' ','1','0','0',' ',' ',' ',' ']
+          - @row6.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 7
+          %td.title
+            %p Теория вероятностей и математическая статистика
+          - @row7 = [' ',' ',' ',' ',' ','3','1','0',' ',' ',' ',' ']
+          - @row7.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 8
+          %td.title
+            %p Физика
+          - @row8 = ['2','2','0','2','2','0','2','1','0',' ',' ',' ']
+          - @row8.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 9
+          %td.title
+            %p Основы электротехники и электроники
+          - @row9 = [' ',' ',' ',' ',' ',' ',' ','2','1','1',' ',' ']
+          - @row9.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 10
+          %td.title
+            %p Численные методы в информатике
+          - @row10 = [' ',' ',' ',' ',' ',' ',' ','2','2','0','0','1']
+          - @row10.each do |i|    
+            %td.data
+              %p #{i}
+        %tr
+          %td
+            %p 11
+          %td.title
+            %p Методы исследования операций
+          - @row11 = [' ',' ',' ',' ',' ',' ','1','1','0','2','1','1']
+          - @row11.each do |i|    
+            %td.data
+              %p #{i}
+      =Haml::Engine.new(File.read('ShareScrp.haml')).render

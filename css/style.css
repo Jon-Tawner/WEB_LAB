@@ -1,0 +1,268 @@
+.avatar {
+  float: right;
+  right: 15px;
+  max-width: 50%;
+  max-height: 400px;
+}
+
+html {
+  color: #000;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+}
+table .title {
+  width: 45%;
+}
+table .title p {
+  text-align: left;
+  font-style: italic;
+  width: 45%;
+}
+table td {
+  border: 2px solid #000;
+}
+table td .num {
+  text-align: center;
+  width: 3%;
+}
+table .head td p {
+  text-align: center;
+  font-weight: bold;
+}
+table .data {
+  text-align: center;
+  font-weight: bold;
+  width: 4%;
+}
+
+header {
+  border: 2px solid #000;
+  color: #000;
+  padding-left: 10px;
+}
+header h1 {
+  font-size: 20px;
+}
+@media (max-width: 700px) {
+  header h1 {
+    font-size: 14px;
+  }
+}
+@media (max-width: 360px) {
+  header h1 {
+    font-size: 12px;
+  }
+}
+
+#nav {
+  text-align: center;
+}
+#nav li {
+  display: inline-block;
+  border: 8px solid blue;
+  background-color: blue;
+  border-radius: 16px;
+}
+#nav a {
+  color: white;
+  text-decoration: none;
+  background-color: blue;
+}
+#nav a:hover {
+  background: #5757db;
+}
+@media (max-width: 700px) {
+  #nav a {
+    font-size: 14px;
+  }
+}
+@media (max-width: 360px) {
+  #nav a {
+    font-size: 12px;
+  }
+}
+#nav .parent_DDmenu {
+  position: relative;
+}
+#nav .parent_DDmenu:hover {
+  width: 220px;
+}
+#nav .parent_DDmenu .DDmenu {
+  display: none;
+  position: absolute;
+  width: 220px;
+  z-index: 10;
+}
+#nav .parent_DDmenu .DDmenu .DDmenuUl {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: blue;
+  width: 220px;
+}
+#nav .parent_DDmenu .DDmenu .DDmenuUl li {
+  border-color: blue;
+  background-color: blue;
+  height: 15px;
+}
+#nav .parent_DDmenu .DDmenu .DDmenuUl li a {
+  background-color: blue;
+  border-color: blue;
+}
+#nav .parent_DDmenu .DDmenu .DDmenuUl li a:hover {
+  background: blue;
+}
+#nav .parent_DDmenu:hover .DDmenu {
+  display: block;
+}
+
+#navAnch {
+  list-style-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ff7a2f), color-stop(50%, #ff7a2f), color-stop(50%, #ffb214));
+  list-style-image: linear-gradient(#ff7a2f 0, #ff7a2f 50%, #ffb214 50%);
+}
+
+#BackGround-BigPhoto {
+  display: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(63, 63, 62, 0.404);
+}
+#BackGround-BigPhoto button {
+  padding: 20px 40px;
+  border: 0;
+  background: blue;
+  color: white;
+  font-size: 24px;
+}
+
+#BigPhoto {
+  margin: 10% auto 10% auto;
+  display: none;
+  max-width: 1500px;
+  max-height: 700px;
+}
+
+#album {
+  text-align: center;
+}
+#album .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+#album .row .photo {
+  margin: 3px;
+}
+#album .row .photo img {
+  height: 240px;
+}
+@media (max-width: 370px) {
+  #album .row .photo img {
+    height: 140px;
+  }
+}
+
+form .error {
+  color: red;
+}
+
+#dateBorn .date {
+  width: 430px;
+}
+#dateBorn .date #calendar {
+  display: none;
+  position: absolute;
+  border: 8px solid #c4ee71;
+  background-color: #c4ee71;
+}
+#dateBorn .date #month {
+  float: left;
+  margin: 0px 3px 0px 40px;
+}
+#dateBorn .date .oneMonth {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#dateBorn .date .oneMonth li {
+  display: inline-block;
+  text-align: center;
+  margin: 0px 3px 0px 3px;
+  width: 30px;
+  border: 2px solid #689dbb;
+  background-color: #689dbb;
+}
+#dateBorn .date .oneMonth .days li {
+  margin-bottom: 2px;
+}
+#dateBorn .date .oneMonth .days li:hover {
+  border: 2px solid #e85f4c;
+  background: #e85f4c;
+}
+#dateBorn .date .oneMonth .days li:active {
+  border: 2px solid #980f00;
+  background: #980f00;
+}
+
+#listSessionStor,
+#listLocalStor,
+#listCookieVisitStor {
+  border: 2px solid #000;
+  margin-top: 10px;
+}
+
+#notification {
+  position: absolute;
+  height: 100vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: black;
+  display: none;
+  padding: 20px 50px 20px 50px;
+}
+#notification p {
+  color: white;
+  font-size: 32px;
+  text-align: center;
+}
+
+.notification__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+.notification__buttons button {
+  padding: 15px 40px;
+  background: #f0f044;
+  color: black;
+  font-size: 16px;
+}

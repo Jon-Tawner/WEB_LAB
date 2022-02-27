@@ -1,0 +1,1 @@
+var anchArts=$(".anchorArt");let ulList=$(".list");anchArts.each((function(t){let e=$("<li></li>"),a=$("<a></a>");a.text(anchArts[t].text()),a.attr("href","#"+anchArts[t].getAttribute("name")),e.addClass("element"),ulList.eq(t).append(e),$(".element:last-child").append(a)}));

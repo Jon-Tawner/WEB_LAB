@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="css/style.css" rel="stylesheet">
+<title>Тест</title>
+</head>
+<body>
+<header>
+<h1>Тест по дисциплине Инженерная графика</h1>
+<nav id='nav'>
+<ul>
+<li class='parent_DDmenu' id='indexNav'>
+<a href='index.html'>Главная страница</a>
+</li>
+<li class='parent_DDmenu' id='aboutMeNav'>
+<a href='aboutMe.html'>Обо мне</a>
+</li>
+<li class='parent_DDmenu' id='myInterestsNav'>
+<a href='myInterests.html'>Мои интересы</a>
+</li>
+<li class='parent_DDmenu' id='coursesNav'>
+<a href='courses.html'>Учёба</a>
+</li>
+<li class='parent_DDmenu' id='photoAlbumNav'>
+<a href='photoAlbum.html'>Фотоальбом</a>
+</li>
+<li class='parent_DDmenu' id='contactNav'>
+<a href='contact.html'>Контакт</a>
+</li>
+<li class='parent_DDmenu' id='viewingHistoryNav'>
+<a href='viewingHistory.html'>История просмотров</a>
+</li>
+</ul>
+<div id='date123'></div>
+</nav>
+<div id='notification'>
+<div>
+<p>Сайт использует куки!!</p>
+<p>Печеньки это вкусно ? :)</p>
+<div class='notification__buttons'>
+<button id='accept'>Согласен</button>
+<button>Не согласен</button>
+</div>
+</div>
+</div>
+
+</header>
+<form action="mailto:psasa7530@gmail.com" name="form" onsubmit="return validate()">
+<p>
+ФИО:
+<input class="required" id="FIO" maxlength="50" size="50" type="text">
+<span class="error" id="1f"></span>
+</p>
+<select name="group">
+<optgroup label="Is">
+<option value="IS-1">IS-1</option>
+<option value="IS-2">IS-2</option>
+</optgroup>
+<optgroup label="PIN">
+<option value="PIN-1">PIN-1</option>
+</optgroup>
+</select>
+<br>
+<br>
+<div style="border: 2px solid rgb(177, 5, 5); padding: 5px;">
+<p>Какой формат страницы является наименьшим?</p>
+A:
+<input class="required" name="int" type="text">
+<span id="2f" style="color:red"></span>
+<br>
+<br>
+<div>
+<p>Как обозначается формат чертежа:</p>
+<p>
+буквой и цифрой
+<input checked="checked" name="2 task" type="radio" value="буквой и цифрой">
+</p>
+цифрой
+<input name="2 task" type="radio" value="цифрой">
+буквой
+<input name="2 task" type="radio" value="буквой">
+</div>
+<p>Формат А4 имеет размеры:</p>
+<select name="group">
+<optgroup label="297">
+<option value="420">х420</option>
+<option value="380">х380</option>
+</optgroup>
+<optgroup label="210">
+<option value="297">297</option>
+<option value="280">280</option>
+<option value="305">305</option>
+</optgroup>
+</select>
+</div>
+<br>
+<input type="submit" value="Отправить">
+<input type="reset" value="Очистить форму">
+<script crossorigin='anonymous' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script src='js\images.js'></script>
+<script src='js\Anchors.js'></script>
+<script src='js\drop_downMenu.js'></script>
+<script src='js\Text.js'></script>
+<script src='js\Cookies.js'></script>
+<script src='js\sessionRecorder.js'></script>
+<script src='js\timeMenu.js'></script>
+<script src='js\CookieResol.js'></script>
+
+</form>
+<script src="js/formInspector.js"></script>
+</body>
+</html>

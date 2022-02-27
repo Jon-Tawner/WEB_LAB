@@ -1,0 +1,1 @@
+if(0==sessionStorage.resolCookie){let o=$("#notification");o.css("display","flex"),o.animate({top:"0",bottom:"0",left:"0",right:"0"}),o.hide(),o.show("100"),$("#accept").on("click",(function(){$("#notification").remove(),sessionStorage.resolCookie=1}))}
