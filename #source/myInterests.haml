@@ -4,7 +4,7 @@
     %meta{:charset => "UTF-8"}/
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    %link{:href => "public/css/style.css", :rel => "stylesheet"}/
     %title Мои интересы
   %body
     %header
@@ -64,5 +64,5 @@
           dignissimos nostrum nemo minus, distinctio quis officiis dolor placeat accusamus! Hic corrupti atque
           tenetur, suscipit distinctio architecto, iste perferendis, mollitia sit praesentium iusto ea dolor rem
           aut?
-    %script{:src => "js/navListAnch.js"}
+    %script{:src => "public/js/navListAnch.js"}
     =Haml::Engine.new(File.read('ShareScrp.haml')).render

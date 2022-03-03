@@ -1,7 +1,7 @@
 var anchArts = $('.anchorArt');
 let ulList = $('.list');
 
-anchArts.each(function(i) {
+anchArts.each(function (i) {
     let anchEl = $('<li></li>');
     let anchor = $('<a></a>');
 

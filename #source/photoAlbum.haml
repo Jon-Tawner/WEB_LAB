@@ -4,7 +4,7 @@
     %meta{:charset => "UTF-8"}/
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    %link{:href => "public/css/style.css", :rel => "stylesheet"}/
     %title Фотоальбом
   %body
     %header
@@ -19,5 +19,5 @@
       -# .row
       -#   .photo
     =Haml::Engine.new(File.read('ShareScrp.haml')).render
-    %script{:src => "js\\photoAlbum.js"}
+    %script{:src => "public/js/photoAlbum.js"}
     %script{:src => "https://unpkg.com/vue@next"}

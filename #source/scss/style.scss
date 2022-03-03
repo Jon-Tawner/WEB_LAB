@@ -1,6 +1,6 @@
 $AverageScreenSize: 700px;
 $SmallScreenSize: 360px;
-@mixin maxSize($w: 50%, $h: 50%){
+@mixin maxSize($w: 50%, $h: 50%) {
 	max-width: $w;
 	max-height: $h;
 }
@@ -92,7 +92,7 @@ header {
 
 	.parent_DDmenu {
 		position: relative;
-		&:hover{
+		&:hover {
 			width: 220px;
 		}
 		.DDmenu {
@@ -100,24 +100,24 @@ header {
 			position: absolute;
 			width: 220px;
 			z-index: 10;
-			.DDmenuUl{
+			.DDmenuUl {
 				display: flex;
 				flex-direction: column;
 				background-color: blue;
 				width: 220px;
-			li{
-				border-color: blue;
-				background-color: blue;
-				height: 15px;
-				a{
-					background-color:blue;
+				li {
 					border-color: blue;
-					&:hover {
-						background: blue;
+					background-color: blue;
+					height: 15px;
+					a {
+						background-color: blue;
+						border-color: blue;
+						&:hover {
+							background: blue;
+						}
 					}
 				}
 			}
-		}
 		}
 		&:hover .DDmenu {
 			display: block;

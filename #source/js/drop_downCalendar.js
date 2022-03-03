@@ -48,11 +48,11 @@ for (let i = 1; i <= TABLE_ELEMENT_LENGHT; i++) {
 
 function setDay() {
     let countday = daysInMonth($("#monthSelect").val(), $("#yearSelect").val());
-    let dayNameNumb = new Date($("#yearSelect").val(),$("#monthSelect").val(), 0).getDay();
+    let dayNameNumb = new Date($("#yearSelect").val(), $("#monthSelect").val(), 0).getDay();
     let numb = 1;
 
     for (let i = 1; i <= TABLE_ELEMENT_LENGHT; i++) {
-        if (i > dayNameNumb && i <= countday+dayNameNumb){
+        if (i > dayNameNumb && i <= countday + dayNameNumb) {
             $("#td-" + i).html(numb);
             $("#td-" + i).click(function () {
                 dayNumb = i - dayNameNumb;

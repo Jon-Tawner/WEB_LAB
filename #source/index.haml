@@ -4,7 +4,7 @@
     %meta{:charset => "UTF-8"}/
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    %link{:href => "public/css/style.css", :rel => "stylesheet"}/
     %title Главная страница
   %body
     %header
@@ -19,4 +19,4 @@
       =Haml::Engine.new(File.read('ShareScrp.haml')).render
     %button{:onclick => "Game()"} Start
     #game
-    %script{:src => "js\\game.js"}
+    %script{:src => "public/js/game.js"}

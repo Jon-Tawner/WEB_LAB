@@ -1,133 +1,64 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    <meta charset="UTF-8">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <script src="https://unpkg.com/vue@next"></script>
-    <link href="css/style.css" rel="stylesheet">
-    <style>
-        .album {
-            margin: auto;
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
-            justify-content: center;
-            gap: 10px;
-            width: 70%;
-            max-width: 1200px;
-        }
-
-        .img_popup {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            backdrop-filter: blur(10px);
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            cursor: pointer;
-        }
-
-        .img {
-            padding-top: 10px;
-            width: 250px;
-            height: 250px;
-        }
-
-        .img_popup .content .text {
-            right: 0;
-            height: 100%;
-            padding: 10px;
-            background-color: white;
-            overflow-y: auto;
-        }
-
-        button {
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            width: 10%;
-        }
-
-        .BigPhoto {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 90%;
-        }
-
-        .BigPhoto img {
-            max-width: 1000px;
-            max-height: 1000px;
-        }
-    </style>
-    <title>Фотоальбом</title>
+<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="public/css/style.css" rel="stylesheet">
+<title>Фотоальбом</title>
 </head>
-
 <body>
-    <header>
-        <h1>Фотоальбом</h1>
-        <nav id='nav'>
-            <ul>
-                <li class='parent_DDmenu' id='indexNav'>
-                    <a href='index.html'>Главная страница</a>
-                </li>
-                <li class='parent_DDmenu' id='aboutMeNav'>
-                    <a href='aboutMe.html'>Обо мне</a>
-                </li>
-                <li class='parent_DDmenu' id='myInterestsNav'>
-                    <a href='myInterests.html'>Мои интересы</a>
-                </li>
-                <li class='parent_DDmenu' id='coursesNav'>
-                    <a href='courses.html'>Учёба</a>
-                </li>
-                <li class='parent_DDmenu' id='photoAlbumNav'>
-                    <a href='photoAlbum.html'>Фотоальбом</a>
-                </li>
-                <li class='parent_DDmenu' id='contactNav'>
-                    <a href='contact.html'>Контакт</a>
-                </li>
-                <li class='parent_DDmenu' id='viewingHistoryNav'>
-                    <a href='viewingHistory.html'>История просмотров</a>
-                </li>
-            </ul>
-            <div id='date123'></div>
-        </nav>
-        <div id='notification'>
-            <div>
-                <p>Сайт использует куки!!</p>
-                <p>Печеньки это вкусно ? :)</p>
-                <div class='notification__buttons'>
-                    <button id='accept'>Согласен</button>
-                    <button>Не согласен</button>
-                </div>
-            </div>
-        </div>
+<header>
+<h1>Фотоальбом</h1>
+<nav id='nav'>
+<ul>
+<li class='parent_DDmenu' id='indexNav'>
+<a href='index.html'>Главная страница</a>
+</li>
+<li class='parent_DDmenu' id='aboutMeNav'>
+<a href='aboutMe.html'>Обо мне</a>
+</li>
+<li class='parent_DDmenu' id='myInterestsNav'>
+<a href='myInterests.html'>Мои интересы</a>
+</li>
+<li class='parent_DDmenu' id='coursesNav'>
+<a href='courses.html'>Учёба</a>
+</li>
+<li class='parent_DDmenu' id='photoAlbumNav'>
+<a href='photoAlbum.html'>Фотоальбом</a>
+</li>
+<li class='parent_DDmenu' id='contactNav'>
+<a href='contact.html'>Контакт</a>
+</li>
+<li class='parent_DDmenu' id='viewingHistoryNav'>
+<a href='viewingHistory.html'>История просмотров</a>
+</li>
+</ul>
+<div id='date123'></div>
+</nav>
+<div id='notification'>
+<div>
+<p>Сайт использует куки!!</p>
+<p>Печеньки это вкусно ? :)</p>
+<div class='notification__buttons'>
+<button id='accept'>Согласен</button>
+<button>Не согласен</button>
+</div>
+</div>
+</div>
 
-    </header>
-    <script crossorigin='anonymous' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4='
-        src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+</header>
+<script crossorigin='anonymous' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script src='public\js\images.js'></script>
+<script src='public\js\Anchors.js'></script>
+<script src='public\js\drop_downMenu.js'></script>
+<script src='public\js\Text.js'></script>
+<script src='public\js\Cookies.js'></script>
+<script src='public\js\sessionRecorder.js'></script>
+<script src='public\js\timeMenu.js'></script>
+<script src='public\js\CookieResol.js'></script>
 
-    <div id="app">
-        <div class="album">
-            <album-item v-for="(photo,i) in photos" :key="i" :package="photo" @click="index = i"></album-item>
-        </div>
-        <img-popup v-if="index !== -1" :photos="photos" :index="index" @close="index=-1">
-        </img-popup>
-    </div>
-
-    <script src='js\images.js'></script>
-    <script src='js\Anchors.js'></script>
-    <script src='js\drop_downMenu.js'></script>
-    <script src='js\Text.js'></script>
-    <script src='js\Cookies.js'></script>
-    <script src='js\sessionRecorder.js'></script>
-    <script src='js\timeMenu.js'></script>
-    <script src='js\CookieResol.js'></script>
-
-    <script src="js\photoAlbum.js"></script>
+<script src="public/js/photoAlbum.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
 </body>
-
 </html>

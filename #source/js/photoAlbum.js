@@ -1,58 +1,58 @@
 
 const PhotoAlbum = {
-    data() {
-      return {
-        index: -1,
-        photos: [
-            {
-                photo: 'img/15548.jpg',
-                title: 'Космос!!',
-                alt: 'Космос!!',
-            }, {
-                photo: 'img/D2QI41g11Kc.jpg',
-                title: 'Limbo',
-                alt: 'Очень мрачная картина!!',
-            }, {
-                photo: 'img/foto-ustavshij-kot.jpg',
-                title: 'Моя морда',
-                alt: 'Sad cat in a suit',
-            }, {
-                photo: 'img/peyzazhi-les-noch-mlechnyy-put.jpg',
-                title: 'Млечный Путь',
-                alt: 'Млечный Путь',
-            }, {
-                photo: 'img/PicsArt_06-18-01_11_46.jpg',
-                title: 'Картинка из снов',
-                alt: 'Что-то на грани мрачного и вдoхновляющего',
-            }
-        ]
-      };
-    }
-  };
-  
-  const app = Vue.createApp(PhotoAlbum);
-  
-  app.component("album-item", {
-    props: ["package"],
-    emits: ["click"],
-    template: `
+  data() {
+    return {
+      index: -1,
+      photos: [
+        {
+          photo: 'public/img/15548.jpg',
+          title: 'Космос!!',
+          alt: 'Космос!!',
+        }, {
+          photo: 'public/img/D2QI41g11Kc.jpg',
+          title: 'Limbo',
+          alt: 'Очень мрачная картина!!',
+        }, {
+          photo: 'public/img/foto-ustavshij-kot.jpg',
+          title: 'Моя морда',
+          alt: 'Sad cat in a suit',
+        }, {
+          photo: 'public/img/peyzazhi-les-noch-mlechnyy-put.jpg',
+          title: 'Млечный Путь',
+          alt: 'Млечный Путь',
+        }, {
+          photo: 'public/img/PicsArt_06-18-01_11_46.jpg',
+          title: 'Картинка из снов',
+          alt: 'Что-то на грани мрачного и вдoхновляющего',
+        }
+      ]
+    };
+  }
+};
+
+const app = Vue.createApp(PhotoAlbum);
+
+app.component("album-item", {
+  props: ["package"],
+  emits: ["click"],
+  template: `
             <div @click="$emit('click')">
                 <div class="photo">
                     <img class="img" :src="package.photo" :alt="package.alt">
                 </div>
             </div>
       `,
-    data() {
-      return {
-        isOpened: false
-      };
-    }
-  });
-  
+  data() {
+    return {
+      isOpened: false
+    };
+  }
+});
+
 app.component("img-popup", {
-    props: ["photos", "index"],
-    emits: ["close"],
-    template: `
+  props: ["photos", "index"],
+  emits: ["close"],
+  template: `
           <teleport to="body">
           <div class="img_popup">
               <button type="button" class="to_left" style="font-size: 100px" @click="previous">&#8249;</button>
@@ -63,22 +63,22 @@ app.component("img-popup", {
           </div>
       </teleport>
       `,
-    data() {
-      return {
-        id: this.$props.index
-      };
+  data() {
+    return {
+      id: this.$props.index
+    };
+  },
+  methods: {
+    previous: function () {
+      this.id = !this.id ? this.$props.photos.length - 1 : this.id - 1;
     },
-    methods: {
-      previous: function () {
-        this.id = !this.id ? this.$props.photos.length - 1 : this.id - 1;
-      },
-      next: function () {
-        this.id = (this.id === this.$props.photos.length - 1) ? 0 : this.id + 1;
-      }
+    next: function () {
+      this.id = (this.id === this.$props.photos.length - 1) ? 0 : this.id + 1;
     }
-  });
-  
-  app.mount("#app");
+  }
+});
+
+app.mount("#app");
 
 
 
