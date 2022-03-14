@@ -1,1 +1,71 @@
-let calendar=$("#calendar"),week=$("#week"),days=$("#days"),monthGroup=$("#monthGroup"),yearGroup=$("#yearGroup"),isCreate=!1,date=new Date;var dayNumb=1,TABLE_ELEMENT_LENGHT=42;$("#date").focus((function(){calendar.css("display","block"),setDay()})),$("#days").click((function(){calendar.hide()}));for(let e=0;e<12;e++){let t=$("<option></option>");t.attr("value",e+1),t.text(months[e]),monthGroup.append(t)}for(let e=1900;e<2200;e++){let t=$("<option></option>");t.attr("value",e),t.text(e),yearGroup.append(t)}for(let e=0;e<7;e++){let t=$("<li></li>");t.text(weekDays[e]),week.append(t)}for(let e=1;e<=TABLE_ELEMENT_LENGHT;e++){let t=$("<li></li>");t.attr("id","td-"+e),days.append(t),e%7==0&&days.append($("<br/>"))}function setDay(){let e=daysInMonth($("#monthSelect").val(),$("#yearSelect").val()),t=new Date($("#yearSelect").val(),$("#monthSelect").val(),0).getDay(),a=1;for(let n=1;n<=TABLE_ELEMENT_LENGHT;n++)n>t&&n<=e+t?($("#td-"+n).html(a),$("#td-"+n).click((function(){dayNumb=n-t,setDate()})),a++):$("#td-"+n).html("-")}function daysInMonth(e,t){return new Date(t,e,0).getDate()}
+let calendar = $("#calendar");
+let week = $("#week");
+let days = $("#days");
+let monthGroup = $("#monthGroup");
+let yearGroup = $("#yearGroup");
+let isCreate = false;
+let date = new Date();
+var dayNumb = 1;
+var TABLE_ELEMENT_LENGHT = 42;
+
+$("#date").focus(function () {
+    calendar.css('display', 'block');
+    setDay();
+})
+$("#days").click(function () {
+    calendar.hide();
+})
+
+for (let i = 0; i < 12; i++) {
+    let month = $("<option></option>");
+    month.attr("value", i + 1);
+    month.text(months[i])
+    monthGroup.append(month);
+}
+
+for (let i = 1900; i < 2200; i++) {
+    let year = $("<option></option>");
+    year.attr("value", i);
+    year.text(i);
+    yearGroup.append(year);
+}
+
+for (let i = 0; i < 7; i++) {
+    let weekDay = $("<li></li>")
+    weekDay.text(weekDays[i])
+    week.append(weekDay);
+}
+
+for (let i = 1; i <= TABLE_ELEMENT_LENGHT; i++) {
+    let day = $("<li></li>");
+    day.attr("id", "td-" + i);
+    days.append(day);
+
+    if ((i) % 7 == 0)
+        days.append($("<br/>"));
+}
+
+
+function setDay() {
+    let countday = daysInMonth($("#monthSelect").val(), $("#yearSelect").val());
+    let dayNameNumb = new Date($("#yearSelect").val(), $("#monthSelect").val(), 0).getDay();
+    let numb = 1;
+
+    for (let i = 1; i <= TABLE_ELEMENT_LENGHT; i++) {
+        if (i > dayNameNumb && i <= countday + dayNameNumb) {
+            $("#td-" + i).html(numb);
+            $("#td-" + i).click(function () {
+                dayNumb = i - dayNameNumb;
+                setDate();
+            })
+            numb++;
+        }
+        else
+            $("#td-" + i).html('-');
+
+    }
+}
+
+function daysInMonth(month, year) {
+    return new Date(year, month, 0).getDate();
+}

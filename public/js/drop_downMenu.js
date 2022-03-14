@@ -1,1 +1,21 @@
-for(const e in Anchors){let a=$(`#${e}`),n=$("<div></div>"),t=$("<div></div>");t.addClass("DDmenuUl"),n.addClass("DDmenu"),n.append(t),a.append(n);for(let a=1;a<Object.keys(Anchors[e]).length;++a){let n=$("<li></li>"),d=$("<a></a>");d.text(Anchors[e][a].text),d.attr("href",Anchors[e].docName+"#"+Anchors[e][a].anchName),d.attr("class","DDmenu_el"),n.append(d),t.append(n)}}
+
+for (const IdLi in Anchors) {
+    let parent = $(`#${IdLi}`)
+    let bodyMenu = $('<div></div>')
+    let anchorUl = $('<div></div>');
+
+    anchorUl.addClass('DDmenuUl');
+    bodyMenu.addClass('DDmenu');
+    bodyMenu.append(anchorUl);
+    parent.append(bodyMenu);
+    for (let i = 1; i < Object.keys(Anchors[IdLi]).length; ++i) {
+        let anchorLi = $('<li></li>');
+        let anchor = $('<a></a>');
+        anchor.text(Anchors[IdLi][i]["text"]);
+        anchor.attr('href', '/website/' + Anchors[IdLi]["docName"] + '#'
+            + Anchors[IdLi][i]["anchName"]);
+        anchor.attr('class', 'DDmenu_el');
+        anchorLi.append(anchor);
+        anchorUl.append(anchorLi);
+    }
+}

@@ -6,6 +6,9 @@ let listCookieVisitStor = $('#listCookieVisitStor');
 for (let i = 0; i < localStorage.length; ++i) {
     key = localStorage.key(i);
 
+    if (key == "Console/Mode" || key == "Console" || key == "NavigationWidth")
+        continue;
+
     let elementList = $('<p></p>');
 
     elementList.text(key + ': ' + localStorage[key]);
@@ -15,7 +18,7 @@ for (let i = 0; i < localStorage.length; ++i) {
 
 for (let i = 0; i < sessionStorage.length; ++i) {
     key = sessionStorage.key(i);
-    if (key == "__prepros-browser-id__") {
+    if (key == "__prepros-browser-id__" || key == "resolCookie") {
         continue;
     }
 

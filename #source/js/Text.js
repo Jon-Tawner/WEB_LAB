@@ -24,12 +24,12 @@ const months = {
 }
 
 const pages = {
-    'Главная страница': "index.html",
-    'Обо мне': "aboutMe.html",
-    'Мои интересы': "myInterests.html",
-    'Учёба': "courses.html",
-    'Фотоальбом': "photoAlbum.html",
-    'Контакт': "contact.html",
-    'История просмотров': "viewingHistory.html",
-    'Тест': "test.html",
+    'Главная страница': "/website/",
+    'Обо мне': "/website/aboutMe/show",
+    'Мои интересы': "/website/interests/show",
+    'Учёба': "/website/courses/show",
+    'Фотоальбом': "/website/photoAlbum/show",
+    'Контакт': "/website/contact/show",
+    'История просмотров': "/website/viewingHistory/show",
+    'Тест': "/website/test/show",
 }

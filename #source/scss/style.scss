@@ -5,6 +5,18 @@ $SmallScreenSize: 360px;
 	max-height: $h;
 }
 
+.date-time {
+	float: right;
+}
+
+.success {
+	color: green;
+}
+
+.error {
+	color: red;
+}
+
 .avatar {
 	float: right;
 	right: 15px;
@@ -92,9 +104,7 @@ header {
 
 	.parent_DDmenu {
 		position: relative;
-		&:hover {
-			width: 220px;
-		}
+
 		.DDmenu {
 			display: none;
 			position: absolute;
@@ -104,7 +114,6 @@ header {
 				display: flex;
 				flex-direction: column;
 				background-color: blue;
-				width: 220px;
 				li {
 					border-color: blue;
 					background-color: blue;
@@ -168,32 +177,25 @@ header {
 }
 
 #album {
-	text-align: center;
-	.row {
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		-webkit-box-pack: center;
-		-ms-flex-pack: center;
-		justify-content: center;
-		-ms-flex-wrap: wrap;
-		flex-wrap: wrap;
-		.photo {
-			margin: 3px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	.photo {
+		margin: 3px;
+		img {
+			height: 240px;
+		}
+		@media (max-width: 370px) {
 			img {
-				height: 240px;
-			}
-			@media (max-width: 370px) {
-				img {
-					height: 140px;
-				}
+				height: 140px;
 			}
 		}
 	}
-}
-
-form .error {
-	color: red;
 }
 
 #dateBorn {

@@ -1,3 +1,15 @@
+.date-time {
+  float: right;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
 .avatar {
   float: right;
   right: 15px;
@@ -87,9 +99,6 @@ header h1 {
 #nav .parent_DDmenu {
   position: relative;
 }
-#nav .parent_DDmenu:hover {
-  width: 220px;
-}
 #nav .parent_DDmenu .DDmenu {
   display: none;
   position: absolute;
@@ -105,7 +114,6 @@ header h1 {
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: blue;
-  width: 220px;
 }
 #nav .parent_DDmenu .DDmenu .DDmenuUl li {
   border-color: blue;
@@ -159,9 +167,6 @@ header h1 {
 }
 
 #album {
-  text-align: center;
-}
-#album .row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -171,20 +176,16 @@ header h1 {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-#album .row .photo {
+#album .photo {
   margin: 3px;
 }
-#album .row .photo img {
+#album .photo img {
   height: 240px;
 }
 @media (max-width: 370px) {
-  #album .row .photo img {
+  #album .photo img {
     height: 140px;
   }
-}
-
-form .error {
-  color: red;
 }
 
 #dateBorn .date {

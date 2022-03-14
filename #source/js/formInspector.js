@@ -7,7 +7,6 @@ let calendarr = $("#calendar");
 function validate() {
     let isOK = false;
     inputs.each(function () {
-        console.log($(this).attr("id"))
         switch ($(this).attr("id")) {
             case "FIO":
                 isOK = CheckFIO($(this));
@@ -73,8 +72,9 @@ function leave(id) {
 
 function CheckFIO(numbEl) {
     el = numbEl;
-    if (el.val().split(' ').length != 3) {
-        $(`#${numbEl.attr("id") + "f"}`).html("*должно быть три слова(пробела)");
+    let re = /^([а-яa-zё]+-?[а-яa-zё]+)( [а-яa-zё]+-?[а-яa-zё]+){1,2}$/Diu;
+    if (!re.test(el.val())) {
+        $(`#${numbEl.attr("id") + "f"}`).html("*Что-то мне не нравится");
         el.css({
             "border-color": 'rgb(224 0 0)'
         });

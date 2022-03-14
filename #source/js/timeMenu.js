@@ -6,14 +6,14 @@ function generateDate() {
         hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours(),
         minutes = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes(),
         seconds = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
-    let textNode = day + '.' + (month + 1) + '.' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+    let textNode = day + '.' + (Number(month) + 1) + '.' + year + ' ' + hours + ':' + minutes + ':' + seconds;
     return textNode;
 }
 
 function resetTime() {
-    $("#date123").text(generateDate());
+    $(".date-time").text(generateDate());
     setInterval(() => {
-        $("#date123").text(generateDate());
+        $(".date-time").text(generateDate());
     }, 1000)
 }
 resetTime();
