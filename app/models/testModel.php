@@ -12,7 +12,7 @@ class testModel extends Model
         $this->validation = new ResultsVerification();
 
         $this->validation->SetRule('FIO', 'isNotEmpty|isString');
-        $this->validation->SetRule('int', 'isInteger|isLess:3');
+        $this->validation->SetRule('int', 'isInteger');
 
         $this->validation->SetAnswer('int', 4);
         $this->validation->SetAnswer('2_task', 'буквой и цифрой');
