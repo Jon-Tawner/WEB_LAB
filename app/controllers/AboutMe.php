@@ -4,11 +4,9 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class aboutMeController extends Controller
-{
+class AboutMe extends Controller {
 
-    public function showAction()
-    {
+    public function show_Action() {
         $this->view->render('Обо мне');
     }
 }

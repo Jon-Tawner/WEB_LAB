@@ -2,18 +2,16 @@
 
 namespace app\models;
 
-use app\core\Model;
 use app\models\validators\FormValidation;
 
-class contactModel extends Model
-{
-    public function __construct()
-    {
+class Contact {
+    public $validation;
+
+    public function __construct() {
         $this->validation = new FormValidation();
     }
 
-    public function validate($post)
-    {
+    public function validate() {
 
         $this->validation->SetRule('FIO', 'isNotEmpty|isString');
         $this->validation->SetRule('phone', 'isPhone');

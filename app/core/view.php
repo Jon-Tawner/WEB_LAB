@@ -13,7 +13,7 @@ class View
         $this->path = $route['controller'] . '/' . $route['action'];
     }
 
-    public function render($title, $vars = [], $layout = 'default')
+    public function render($title, $vars = [], $err = [], $layout = 'default')
     {
         $path = 'app/views/' . $this->path . '.php';
         if (file_exists($path)) {
@@ -25,9 +25,11 @@ class View
                 require $layoutPath;
             } else {
                 echo 'лейоут не найден: ' . $layoutPath;
+                View::errorCode(404);
             }
         } else {
             echo 'Вид не найден: ' . $this->path;
+            View::errorCode(404);
         }
     }
 
@@ -45,20 +47,5 @@ class View
     {
         header('locatoin: ' . $url);
         exit;
-    }
-
-    public function ShowSucces()
-    {
-        echo '<p class="success">Валидация пройдена!!</p>';
-    }
-
-    public function message($status, $message = 'done!')
-    {
-        exit(json_encode(['status' => $status, 'message' => serialize($message)]));
-    }
-
-    public function location($url)
-    {
-        exit(json_encode(['url' => $url]));
     }
 }

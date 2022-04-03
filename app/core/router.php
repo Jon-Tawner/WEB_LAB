@@ -2,26 +2,22 @@
 
 namespace app\core;
 
-class Router
-{
+class Router {
 
     protected $route = [];
 
-
-    public function __construct()
-    {
-        $this->route['controller'] = isset($_REQUEST["controller"]) ? $_REQUEST["controller"] : "main";
-        $this->route['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : "index";
+    public function __construct() {
+        $this->route['controller'] = isset($_REQUEST["controller"]) ? $_REQUEST["controller"] : "Main";
+        $this->route['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : "show";
 
         $this->run();
     }
 
-    public function run()
-    {
-        $path = 'app\controllers\\' . $this->route['controller'] . 'Controller';
+    public function run() {
+        $path = 'app\controllers\\' . $this->route['controller'];
 
         if (class_exists($path)) {
-            $action = $this->route['action'] . 'Action';
+            $action = $this->route['action'] . '_Action';
             if (method_exists($path, $action)) {
                 $controller = new $path($this->route);
                 $controller->$action();

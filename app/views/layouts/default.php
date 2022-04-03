@@ -1,13 +1,22 @@
 <?php
 $arr = [
-    'main' => ['index', 'Главная страница'],
-    'aboutMe' => ['show', 'Обо мне'],
-    'interests' => ['show', 'Мои интересы'],
-    'courses' => ['show', 'Учёба'],
-    'test' => ['show', 'Тест'],
-    'photoAlbum' => ['show', 'Фотоальбом'],
-    'contact' => ['show', 'Контакт'],
-    'viewingHistory' => ['show', 'История просмотров']
+    'Main' => ['show' => 'Главная страница'],
+    'AboutMe' => ['show' => 'Обо мне'],
+    'Interests' => ['show' => 'Мои интересы'],
+    'Courses' => ['show' => 'Учёба'],
+    'Test' => ['show' => 'Тест'],
+    'PhotoAlbum' => ['show' => 'Фотоальбом'],
+    'Contact' => ['show' => 'Контакт'],
+    'ViewingHistory' => ['show' => 'История просмотров'],
+    'GuestBook' => [
+        'show' => 'Гостевая книга',
+        'sendBook' => 'Загрузка гостевой книги'
+    ],
+    'Blog' => [
+        'show' => 'Мой блог',
+        'editor' => 'Редактор блога',
+        'sendCVS' => 'Загрузка сообщений блога',
+    ],
 ];
 ?>
 
@@ -34,11 +43,12 @@ $arr = [
         </h1>
         <nav id='nav'>
             <ul>
-                <?php foreach ($arr as $key => $value) { ?>
-                    <li class='parent_DDmenu' id=<?php echo $key . 'Nav'; ?>>
-                        <a href=<?php echo '/website/' . $key . '/' . $value[0]; ?>><?php echo $value[1];  ?></a>
+                <?php foreach ($arr as $key => $value)
+                    foreach ($arr[$key] as $key1 => $value1) : ?>
+                    <li class='parent_DDmenu' id=<?= $key . $key1 . 'Nav'; ?>>
+                        <a href=<?= '/website/' . $key . '/' . $key1; ?>><?= $value1;  ?></a>
                     </li>
-                <?php } ?>
+                <?php endforeach ?>
             </ul>
 
             <script type="text/javascript" src='/website/public/js/drop_downMenu.js'></script>
@@ -59,6 +69,17 @@ $arr = [
         <script type="text/javascript" src='/website/public/js/CookieResol.js'></script>
 
     </header>
+    <?php
+    if (!empty($err)) {
+        foreach ($err as $key1 => $value1) {
+            foreach ($err[$key1] as $value2) {
+                echo '<p class="error"> ' . $key1 . ': ' . $value2 . '</p>';
+            }
+        }
+    }
+    ?>
+
+
     <?php echo $content; ?>
 
 </body>

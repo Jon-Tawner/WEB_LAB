@@ -4,11 +4,9 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class ViewingHistoryController extends Controller
-{
+class ViewingHistory extends Controller {
 
-    public function showAction()
-    {
+    public function show_Action() {
         $this->view->render('История просмотров');
     }
 }

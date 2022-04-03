@@ -4,11 +4,10 @@
     </div>
 
     <?php $i = 0;
-    foreach ($vars  as $value) {
-    ?>
-        <div class="photo"><img class="img" id=<?php echo $i++ ?> src=<?php echo "/website/public/img/" . $value['file']; ?> alt=<?php echo $value['alt'] ?>></div>
+    foreach ($vars  as $value) : ?>
+        <div class="photo"><img class="img" id=<?= $i++ ?> src=<?= "/website/public/img/" . $value->file; ?> alt=<?= $value->alt ?>></div>
 
-    <?php } ?>
+    <?php endforeach ?>
 
 
     <script type="text/javascript" src="/website/public/js/photoAlbum.js"></script>

@@ -1,3 +1,7 @@
+.block {
+  outline: 2px solid #000;
+}
+
 .date-time {
   float: right;
 }

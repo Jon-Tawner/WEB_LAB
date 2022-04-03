@@ -18,4 +18,4 @@ for (const IdLi in Anchors) {
         anchorLi.append(anchor);
         anchorUl.append(anchorLi);
     }
-}
+} 

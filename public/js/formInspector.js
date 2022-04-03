@@ -72,7 +72,7 @@ function leave(id) {
 
 function CheckFIO(numbEl) {
     el = numbEl;
-    let re = /^([а-яa-zё]+-?[а-яa-zё]+)( [а-яa-zё]+-?[а-яa-zё]+){1,2}$/Diu;
+    let re = /^([а-яa-zё]+-?[а-яa-zё]+)( [а-яa-zё]+-?[а-яa-zё]+){1,2}$/;
     if (!re.test(el.val())) {
         $(`#${numbEl.attr("id") + "f"}`).html("*Что-то мне не нравится");
         el.css({

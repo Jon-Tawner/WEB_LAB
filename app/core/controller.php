@@ -14,7 +14,7 @@ abstract class Controller
     {
         $this->route = $route;
         $this->view = new View($route);
-        $this->model = $this->loadModel($route['controller'] . 'Model');
+        $this->model = $this->loadModel($route['controller']);
     }
 
     public function loadModel($name)

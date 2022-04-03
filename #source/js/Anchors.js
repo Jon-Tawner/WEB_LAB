@@ -1,6 +1,6 @@
 const Anchors = {
-    "interestsNav": {
-        docName: "interests/show",
+    "InterestsshowNav": {
+        docName: "Interests/show",
         1: { anchName: "hobby", text: "Моё хобби" },
         2: { anchName: "books", text: "Мои любимые книги" },
         3: { anchName: "music", text: "Моя любимая музыка" },

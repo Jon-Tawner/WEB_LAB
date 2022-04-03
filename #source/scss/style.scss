@@ -5,6 +5,10 @@ $SmallScreenSize: 360px;
 	max-height: $h;
 }
 
+.block {
+	outline: 2px solid #000;
+}
+
 .date-time {
 	float: right;
 }

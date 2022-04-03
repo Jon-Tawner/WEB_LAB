@@ -2,30 +2,30 @@
 if (!empty($vars)) {
     foreach ($vars as $key => $value) {
         switch ($key) {
-            case 'errors':
-                foreach ($value as $key1 => $value1) {
-                    foreach ($value1 as $value2) {
-                        echo '<p class="error"> ' . $key1 . ': ' . $value2 . '</p>';
-                    }
-                }
-                break;
-
-            case 'errors':
+            case 'rating':
                 echo '<p class="rating"> ' . $value . '</p>';
-                break;
-            default:
-                echo $vars[$key];
                 break;
         }
     }
 }
 ?>
-<form name="form" action="/website/test/show" method="post" onsubmit="return validate()">
+
+<script>
+    function foo() {
+        $.ajax({
+            url: "1.php", //the page containing php script
+            type: "POST", //request type
+            success: function(result) {
+                alert(result);
+            }
+        });
+    }
+</script>
+<form name="form" action="/website/test/show" method="post">
 
     <p>
         ФИО:
         <input name="FIO" class="required" id="FIO" maxlength="50" size="50" type="text">
-        <span class="error" id="1f"></span>
     </p>
     <select name="group">
         <optgroup label="Is">
@@ -42,7 +42,6 @@ if (!empty($vars)) {
         <p>Какой формат страницы является наименьшим?</p>
         A:
         <input class="required" name="int" type="text">
-        <span id="2f" style="color:red"></span>
         <br>
         <br>
         <div>
@@ -59,13 +58,13 @@ if (!empty($vars)) {
         <p>Формат А4 имеет размеры:</p>
         <select name="group">
             <optgroup label="297">
-                <option value="297х420">х420</option>
-                <option value="297х380">х380</option>
+                <option value="297х420">297х420</option>
+                <option value="297х380">297х380</option>
             </optgroup>
             <optgroup label="210">
-                <option value="210х297">297</option>
-                <option value="210х280">280</option>
-                <option value="210х305">305</option>
+                <option value="210х297">210x297</option>
+                <option value="210х280">210x280</option>
+                <option value="210х305">210x305</option>
             </optgroup>
         </select>
     </div>
@@ -74,4 +73,16 @@ if (!empty($vars)) {
     <input name="clean" type="reset" value="Очистить форму">
 </form>
 
-<script type="text/javascript" src='/website/public/js/formInspector.js'></script>
+<button type="button" onclick="location='/website/test/show?link'">Show history</button>
+<?
+if (isset($_GET["link"])) {
+    foreach ($vars["history"] as $value) {
+        echo "<p>ФИО: " . $value->name . "</p>";
+        echo "<p>Какой формат страницы является наименьшим?: " . $value->answer1 . "</p>";
+        echo "<p>Как обозначается формат чертежа: " . $value->answer2 . "</p>";
+        echo "<p>Формат А4 имеет размеры: " . $value->answer3 . "</p>";
+        echo "<p>Баллы: " . $value->rating . "</p>";
+        echo "<p>Дата: " . $value->date . "</p>";
+        echo "<hr>";
+    }
+}

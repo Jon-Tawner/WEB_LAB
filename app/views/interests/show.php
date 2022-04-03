@@ -1,13 +1,13 @@
 <main>
-    <?php foreach ($vars as $value) { ?>
+    <?php foreach ($vars as $value) : ?>
         <section class="article">
             <h2>
-                <a class="anchorArt" name="<?php echo $value['anchor']; ?>"><?php echo $value['title']; ?> </a>
+                <a class="anchorArt" name="<?= $value->anchor; ?>"> <?= $value->title; ?> </a>
             </h2>
             <p>
-                <?php echo $value['content']; ?>
+                <?= $value->content; ?>
             </p>
         </section>
         <hr>
-    <?php } ?>
+    <?php endforeach ?>
 </main>

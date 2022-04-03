@@ -4,11 +4,9 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class CoursesController extends Controller
-{
+class Courses extends Controller {
 
-    public function showAction()
-    {
+    public function show_Action() {
         $this->view->render('Учёба');
     }
 }

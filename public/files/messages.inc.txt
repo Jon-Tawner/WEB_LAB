@@ -1,0 +1,5 @@
+People1;asdasd@mail.ru;Textfjasdljgl
+People2;asgasdaf@mail.ru;Text31
+People3;asddd@gmail.ru;Text2
+People4;asgasdsd@mail.ru;Text1
+nw;file@fsad.ge;111

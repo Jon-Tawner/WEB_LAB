@@ -125,18 +125,24 @@
 //   image.eq(image.length - 1).append(img);
 // }
 
-
+let buffer = [];
 $('.photo').each(function () {
+  let img = $(this).children("img");
+  buffer.push(img)
   $(this).on('click', function () {
     BigPhotoOpen(true, img.attr("src"));
-    current = key - 1;
+    current = img.attr("id") - 1;
   })
 });
 
 let backGround_BigPhoto = $("#BackGround-BigPhoto");
 let bigPhoto = $("#BigPhoto");
 
-function BigPhotoOpen(setActiv, src) {
+backGround_BigPhoto.on('click', function () {
+  BigPhotoOpen(false);
+})
+
+function BigPhotoOpen(setActiv, src = null) {
   if (setActiv) {
     backGround_BigPhoto.css("display", 'flex');
     bigPhoto.attr("src", src);
@@ -147,6 +153,15 @@ function BigPhotoOpen(setActiv, src) {
     bigPhoto.css("display", 'none');
   }
 }
+
+$(document).keydown(function (e) {
+  if (e.keyCode == 37) {
+    prev();
+  }
+  else if (e.keyCode == 39) {
+    next();
+  }
+})
 
 function next() {
   current++;
