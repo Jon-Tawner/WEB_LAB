@@ -16,7 +16,7 @@ class Blog {
 
     public function validate_editor_Action() {
         $this->validation->SetRule('title', 'isNotEmpty|isString');
-        $this->validation->SetRule('img', 'notRequared|isImage');
+        $this->validation->SetRule('img', 'notRequired|isImage');
 
         $this->validation->validate(['title'], ['img']);
     }
@@ -53,7 +53,7 @@ class Blog {
         $newRecord->author = $author;
         $newRecord->img = $img;
         $newRecord->date = $date;
-        $newRecord->savePrepare();
+        return $newRecord->savePrepare();
     }
 
     public function save($title, $content, $date, $author, $img = '') {
@@ -64,7 +64,7 @@ class Blog {
         $newRecord->author = $author;
         $newRecord->img = $img;
         $newRecord->date = $date;
-        $newRecord->save();
+        return $newRecord->save();
     }
 
     public function saveImage($file) {

@@ -31,8 +31,6 @@ class Blog extends BaseActiveRecord {
         $sql->bindParam(":date", $this->date);
         $sql->bindParam(":author", $this->author);
 
-        $sql->execute();
-
-        return $this;
+        return $sql->execute();
     }
 }

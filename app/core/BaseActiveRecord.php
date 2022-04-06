@@ -9,7 +9,6 @@ class BaseActiveRecord {
     public static $pdo;
     protected static $tablename;
     protected static $dbfields = array();
-    public static $count;
 
     public function __construct() {
         if (!static::$tablename) {
@@ -31,7 +30,9 @@ class BaseActiveRecord {
     }
 
     public function getCount() {
-        $this->count = static::$pdo->query("SELECT COUNT(*) FROM " . static::$tablename);
+        $count = static::$pdo->query("SELECT COUNT(*) FROM " . static::$tablename)->fetch();
+        $count = (int)$count[0];
+        return $count;
     }
 
     public function getData() {
@@ -73,7 +74,7 @@ class BaseActiveRecord {
     }
 
     public function save() {
-        [$values, $fields] = static::getData();
+        [$values, $fields] = $this->getData();
 
         if (isset($this->id)) {
             $countFields = count($fields);
@@ -85,9 +86,7 @@ class BaseActiveRecord {
             $sql = "INSERT INTO " . static::$tablename . " (" . join(', ', array_slice($fields, 1)) . ") VALUES(" . join(', ', array_slice($values, 1)) . ")";
         }
 
-        static::$pdo->query($sql);
-
-        return $this;
+        return static::$pdo->query($sql);
     }
 
     public function find($id) {

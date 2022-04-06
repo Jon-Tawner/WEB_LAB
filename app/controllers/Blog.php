@@ -9,19 +9,7 @@ class Blog extends Controller {
         $lenPage = 2;
         $vars = array();
 
-        $this->setPage($_GET["page"]);
-
-        if (isset($_GET["page"])) {
-            $vars["page"] = $_GET["page"] < 0 ? 0 : $_GET["page"];
-        } else {
-            $vars["page"] = 0;
-        }
-
-        if (!empty($_POST)) {
-            $this->model->validate_editor_Action();
-            if (empty($this->model->validation->Errors))
-                $this->saveBlog();
-        }
+        $vars["page"] = isset($_GET["page"]) ? $this->setPage($_GET["page"]) : 0;
 
         $firsElementPage = $vars["page"] * $lenPage;
         $vars['regords'] = $this->model->table->getRecords($firsElementPage, $lenPage, "ORDER BY date DESC");
@@ -30,6 +18,12 @@ class Blog extends Controller {
     }
 
     public function editor_Action() {
+        if (!empty($_POST)) {
+            $this->model->validate_editor_Action();
+            if (empty($this->model->validation->Errors))
+                $this->saveBlog();
+        }
+
         $this->view->render('Редактор блога', [], $this->model->validation->Errors);
     }
 
@@ -46,18 +40,24 @@ class Blog extends Controller {
 
 
 
-    public function setPage($page) {
-        if (isset($page)) {
-            $vars["page"] = $page < 0 ? 0 : $page;
-        } else {
-            $vars["page"] = 0;
-        }
+    public function setPage($pageIn) {
+        $countRecords = $this->model->table->getCount();
+        $countPages = (int)($countRecords / 2);
+        if ($pageIn <= $countPages && $pageIn > 0)
+            $pageOut = $pageIn;
+        elseif ($pageIn > $countPages)
+            $pageOut = $countPages;
+        else
+            $pageOut = 0;
+
+        return $pageOut;
     }
 
     public function importCVS() {
         if ($vars = $this->model->getFromCVS($_FILES['cvs']["tmp_name"])) {
             foreach ($vars as $value) {
-                $this->model->savePrepare($value['title'], $value['content'], $value['date'], $value['author']);
+                if ($this->model->savePrepare($value['title'], $value['content'], $value['date'], $value['author']) === false);
+                echo "Не удалось загрузить данные с заголовком:" . $value['title'] . "<br>";
             }
             echo "Файл загружен<br>";
         } else
@@ -65,15 +65,20 @@ class Blog extends Controller {
     }
 
     public function saveBlog() {
-        if (isset($_FILES["img"])) {
-            if ($this->model->saveImage($_FILES["img"])) {
-                $this->model->save($_POST['title'], $_POST['content'], date('d.m.y h:i:s'), 'ME', $_FILES["img"]['name']);
-                echo "Данные загружены<br>";
-            } else
-                echo "Данные нe загружены<br>";
-        } else {
-            $this->model->save($_POST['title'], $_POST['content'], date('d.m.y h:i:s'), 'ME');
+        $failure = false;
+        if (!empty($_FILES["img"]["name"])) {
+            if ($this->model->saveImage($_FILES["img"]))
+                if ($this->model->save($_POST['title'], $_POST['content'], date('d.m.y h:i:s'), 'ME', $_FILES["img"]['name']) === false) {
+                    $failure = true;
+                    if (unlink("../website/public/blog/img/" . $_FILES["img"]["name"]) == false)
+                        echo "Не даляет файл" . $_FILES["img"]['name'];
+                }
+        } else
+            $failure = !$this->model->save($_POST['title'], $_POST['content'], date('d.m.y h:i:s'), 'ME');
+
+        if ($failure === false)
             echo "Данные загружены<br>";
-        }
+        else
+            echo "Данные нe загружены<br>";
     }
 }

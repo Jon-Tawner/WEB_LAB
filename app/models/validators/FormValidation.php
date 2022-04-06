@@ -9,7 +9,6 @@ class FormValidation {
     public $files;
 
     public $messages = [
-        'notRequired' => '',
         'isNotEmpty' => 'Поле должно быть обязательно заполнено',
         'isInteger' => 'Поле должно быть целочисленным',
         'isString' => 'Поле должно быть строкой',
@@ -40,12 +39,14 @@ class FormValidation {
 
     public function validation($request, $field_array) {
         foreach ($field_array as $key) {
-            $funs = explode('|', $this->Rules[$key]);
-            foreach ($funs as $value) {
+            $rul = explode('|', $this->Rules[$key]);
+            foreach ($rul as $value) {
                 $result = '';
                 $params = explode(':', $value);
                 $func = $params[0];
-                if ($func == 'notRequired' && !isset($data) && empty($data)) {
+                if ($func == 'notRequired') {
+                    if (empty($data))
+                        break;
                     continue;
                 }
                 if ($func != $value) {
