@@ -11,9 +11,12 @@ class FormValidation {
     public $messages = [
         'isNotEmpty' => 'Поле должно быть обязательно заполнено',
         'isInteger' => 'Поле должно быть целочисленным',
-        'isString' => 'Поле должно быть строкой',
+        'isString' => 'Поле должно содержать символы',
         'isLess' => 'Поле должно быть меньше ',
         'isGreater' => 'Поле должно быть больше ',
+        'isMoreCharaters' => 'Поле должно содержать больше символов',
+        'isLessCharaters' => 'Поле должно содержать меньше символов',
+        'oneWord' => 'Поле должно содержать одно слово',
         'isEqual' => 'Поле должно быть равно ',
         'isEmail' => 'Поле должно быть в формате email',
         'isPhone' => 'Поле должно быть в формате номера телефона',
@@ -62,6 +65,18 @@ class FormValidation {
         }
     }
 
+    public function oneWord($data) {
+        return strpos(trim($data), ' ') ? true : false;
+    }
+
+    public function isMoreCharaters($data, $size) {
+        return strlen($data) > $size ? true : false;
+    }
+
+    public function isLessCharaters($data, $size) {
+        return strlen($data) < $size ? true : false;
+    }
+
     public function isExtension($file, $extension) {
         return $file["type"] == $extension ? true : false;
     }
@@ -95,11 +110,11 @@ class FormValidation {
     }
 
     public function isLess($data, $value) {
-        return is_numeric($data) && ($data < $value) ? true : false;
+        return ($data < $value) ? true : false;
     }
 
     public function isGreater($data, $value) {
-        return is_numeric($data) && ($data > $value) ? true : false;
+        return ($data > $value) ? true : false;
     }
 
     public function isEqual($data, $value) {

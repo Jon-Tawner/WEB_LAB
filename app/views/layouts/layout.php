@@ -1,21 +1,18 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+
 $arr = [
-    'Main' => ['show' => 'Главная страница'],
-    'AboutMe' => ['show' => 'Обо мне'],
-    'Interests' => ['show' => 'Мои интересы'],
-    'Courses' => ['show' => 'Учёба'],
-    'Test' => ['show' => 'Тест'],
-    'PhotoAlbum' => ['show' => 'Фотоальбом'],
-    'Contact' => ['show' => 'Контакт'],
-    'ViewingHistory' => ['show' => 'История просмотров'],
-    'GuestBook' => [
-        'show' => 'Гостевая книга',
-        'sendBook' => 'Загрузка гостевой книги'
-    ],
+    'Main' => ['show' => ['title' => 'Главная страница', 'onlyUser' => '0']],
+    'AboutMe' => ['show' => ['title' => 'Обо мне', 'onlyUser' => '1']],
+    'Interests' => ['show' => ['title' => 'Мои интересы', 'onlyUser' => '1']],
+    'Courses' => ['show' => ['title' => 'Учёба', 'onlyUser' => '1']],
+    'Test' => ['show' => ['title' => 'Тест', 'onlyUser' => '1']],
+    'PhotoAlbum' => ['show' => ['title' => 'Фотоальбом', 'onlyUser' => '0']],
+    'Contact' => ['show' => ['title' => 'Контакт', 'onlyUser' => '0']],
+    'GuestBook' => ['show' => ['title' => 'Гостевая книга', 'onlyUser' => '0']],
     'Blog' => [
-        'show' => 'Мой блог',
-        'editor' => 'Редактор блога',
-        'sendCVS' => 'Загрузка сообщений блога',
+        'show' => ['title' => 'Блоги', 'onlyUser' => '0'],
+        'editor' => ['title' => 'Редактор блога', 'onlyUser' => '1'],
     ],
 ];
 ?>
@@ -38,17 +35,24 @@ $arr = [
 
 <body>
     <header>
-        <h1 id="title"><?php echo $title; ?>
+        <h1 id="title">
+            <? if (isset($_SESSION['user'])) : ?>
+                <?= "Привет " . $_SESSION['user']['name'] . '!'; ?>
+            <? endif ?>
             <div class='date-time'></div>
+            <br>
+            <p style="text-align:center;"><?= $title; ?></p>
+            <p style="text-align:center;"><a href="/website/Account/authorization"><? echo isset($_SESSION['user']) ? 'Выйти' : 'Войти' ?></a></p>
         </h1>
         <nav id='nav'>
             <ul>
                 <?php foreach ($arr as $key => $value)
-                    foreach ($arr[$key] as $key1 => $value1) : ?>
+                    foreach ($value as $key1 => $value1)
+                        if ($value1['onlyUser'] == '0' || isset($_SESSION['user'])) : ?>
                     <li class='parent_DDmenu' id=<?= $key . $key1 . 'Nav'; ?>>
-                        <a href=<?= '/website/' . $key . '/' . $key1; ?>><?= $value1;  ?></a>
+                        <a href=<?= '/website/' . $key . '/' . $key1; ?>><?= $value1['title'];  ?></a>
                     </li>
-                <?php endforeach ?>
+                <?php endif ?>
             </ul>
 
             <script type="text/javascript" src='/website/public/js/drop_downMenu.js'></script>
@@ -64,11 +68,9 @@ $arr = [
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src='/website/public/js/Cookies.js'></script>
-        <script type="text/javascript" src='/website/public/js/sessionRecorder.js'></script>
-        <script type="text/javascript" src='/website/public/js/CookieResol.js'></script>
 
     </header>
+
     <?php
     if (!empty($err)) {
         foreach ($err as $key1 => $value1) {
@@ -77,8 +79,12 @@ $arr = [
             }
         }
     }
+    if (isset($vars["errors"])) {
+        foreach ($vars["errors"] as $value) {
+            echo '<p class="error"> ' . $value . '</p>';
+        }
+    }
     ?>
-
 
     <?php echo $content; ?>
 

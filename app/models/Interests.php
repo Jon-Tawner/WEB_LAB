@@ -2,14 +2,12 @@
 
 namespace app\models;
 
-use app\models\tables\Interests as TInterests;
+use app\core\BaseActiveRecord;
 
-class Interests
-{
-    public $table;
-
-    function __construct()
-    {
-        $this->table = new TInterests;
-    }
+class Interests extends BaseActiveRecord {
+    public $tablename = 'interests';
+    public $id;
+    public $title;
+    public $anchor;
+    public $content;
 }

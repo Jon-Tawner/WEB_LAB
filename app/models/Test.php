@@ -2,20 +2,26 @@
 
 namespace app\models;
 
-use app\models\tables\Test as TTest;
 use app\models\validators\ResultsVerification;
 
-class Test
-{
+use app\core\BaseActiveRecord;
+
+class Test extends BaseActiveRecord {
     public $validation;
-    public $table;
 
-    public function __construct()
-    {
+    public $tablename = 'testhistory';
+    public $id;
+    public $name;
+    public $answer1;
+    public $answer2;
+    public $answer3;
+    public $rating;
+    public $date;
+
+    public function __construct() {
+        parent::__construct();
         $this->validation = new ResultsVerification();
-        $this->table = new TTest;
 
-        $this->validation->SetRule('FIO', 'isNotEmpty|isString');
         $this->validation->SetRule('int', 'isInteger');
 
         $this->validation->SetAnswer('int', 4);
@@ -23,19 +29,14 @@ class Test
         $this->validation->SetAnswer('group', '210х297');
     }
 
-    public function validate()
-    {
-        $this->validation->validate(['FIO', 'int']);
-    }
+    public function saveAnswer($rating) {
+        $this->name = $_SESSION["user"]["name"];
+        $this->answer2 = $_POST["int"];
+        $this->answer3 = $_POST["2_task"];
+        $this->answer1 = $_POST["group"];
+        $this->rating = $rating;
+        $this->date = date('d.m.y h:i:s');
 
-    public function save($rating)
-    {
-        $this->table->name = $_POST["FIO"];
-        $this->table->answer2 = $_POST["int"];
-        $this->table->answer3 = $_POST["2_task"];
-        $this->table->answer1 = $_POST["group"];
-        $this->table->rating = $rating;
-        $this->table->date = date('d.m.y h:i:s');
-        $this->table->save();
+        parent::save();
     }
 }

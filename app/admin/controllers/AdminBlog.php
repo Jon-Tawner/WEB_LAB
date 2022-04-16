@@ -1,15 +1,15 @@
 <?php
 
-namespace app\controllers;
+namespace app\admin\controllers;
 
 use app\core\Controller;
 
-class Blog extends Controller {
+class AdminBlog extends Controller {
     public function show_Action() {
         $lenPage = 2;
         $vars = array();
 
-        $vars["page"] = isset($_GET["page"]) ? $this->setPage($_GET["page"], $lenPage) : 0;
+        $vars["page"] = isset($_GET["page"]) ? $this->setPage($_GET["page"], $lenPage) : 1;
         $firsElementPage = ($vars["page"] - 1) * $lenPage;
 
         $vars['reсords'] = $this->model->getRecords($firsElementPage, $lenPage, "ORDER BY date DESC");
@@ -27,10 +27,22 @@ class Blog extends Controller {
         $this->view->render('Редактор блога', [], $this->model->validation->Errors);
     }
 
+    public function sendCVS_Action() {
+
+        if (!empty($_POST)) {
+            $this->model->validate_sendCVS_Action();
+            if (empty($this->model->validation->Errors))
+                $this->importCVS();
+        }
+
+        $this->view->render('Загрузка сообщений блога', [], $this->model->validation->Errors);
+    }
+
+
+
     public function setPage($pageIn, $lenPage) {
         $countRecords = $this->model->getCount() - 1;
         $countPages = ceil($countRecords / $lenPage);
-
         if ($pageIn <= $countPages && $pageIn > 0)
             $pageOut = $pageIn;
         elseif ($pageIn > $countPages)
@@ -39,6 +51,17 @@ class Blog extends Controller {
             $pageOut = 1;
 
         return $pageOut;
+    }
+
+    public function importCVS() {
+        if ($vars = $this->model->getFromCVS($_FILES['cvs']["tmp_name"])) {
+            foreach ($vars as $value) {
+                if ($this->model->savePrepareBlog($value['title'], $value['content'], $value['date'], $value['author']) === false);
+                echo "Не удалось загрузить данные с заголовком:" . $value['title'] . "<br>";
+            }
+            echo "Файл загружен<br>";
+        } else
+            echo "Файл нe загружен<br>";
     }
 
     public function saveBlog() {

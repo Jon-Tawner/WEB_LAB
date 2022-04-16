@@ -1,10 +1,10 @@
 <?php
 
-namespace app\models;
+namespace app\admin\models;
 
 use app\models\validators\FormValidation;
 
-class GuestBook {
+class AdminGuestBook {
     public $path = "public/files/messages.inc.txt";
     public $file;
     public $validation;

@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+
 use app\core\Controller;
 
 class Test extends Controller {
@@ -12,14 +14,14 @@ class Test extends Controller {
             $vars = $this->checkAnswers();
         }
 
-        $vars["history"] = $this->model->table->findAll();
+        $vars["history"] = $this->model->findAll('WHERE name=\'' . $_SESSION['user']['name'] . '\'');
+        if ($this->model->getCount() >= 2)
+            usort($vars["history"], function ($a, $b) {
+                $date1 = $a->date;
+                $date2 = $b->date;
 
-        usort($vars["history"], function ($a, $b) {
-            $date1 = $a->date;
-            $date2 = $b->date;
-
-            return $date2 < $date1 ? -1 : 1;
-        });
+                return $date2 < $date1 ? -1 : 1;
+            });
 
 
         $this->view->render('Тест', $vars, $this->model->validation->Errors);
@@ -27,11 +29,8 @@ class Test extends Controller {
 
     public function checkAnswers() {
         $vars = array();
-        $this->model->validate();
-        if (empty($this->model->validation->Errors)) {
-            $vars["rating"] = $this->model->validation->CheckAnswer($_POST);
-            $this->model->save($vars["rating"]);
-        }
+        $vars["rating"] = $this->model->validation->CheckAnswer($_POST);
+        $this->model->saveAnswer($vars["rating"]);
         return $vars;
     }
 }

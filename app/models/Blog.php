@@ -3,14 +3,21 @@
 namespace app\models;
 
 use app\models\validators\FormValidation;
-use app\models\tables\Blog as TBlog;
+use app\core\BaseActiveRecord;
 
-class Blog {
-    public $table;
+class Blog extends BaseActiveRecord {
     public $validation;
 
+    public $tablename = 'blog';
+    public $id;
+    public $title;
+    public $img;
+    public $content;
+    public $date;
+    public $author;
+
     function __construct() {
-        $this->table = new TBlog;
+        parent::__construct();
         $this->validation = new FormValidation;
     }
 
@@ -21,50 +28,13 @@ class Blog {
         $this->validation->validate(['title'], ['img']);
     }
 
-    public function validate_sendCVS_Action() {
-        $this->validation->SetRule('cvs', 'isExtension:application/vnd.ms-excel');
-
-        $this->validation->validate([], ['cvs']);
-    }
-
-
-    public function getFromCVS($file) {
-        $arrEl = array();
-        $el = array();
-        $fd = fopen($file, "r") or die("Файл нельзя открыть");
-
-        while (($data = fgetcsv($fd, 1000, ";")) !== FALSE) {
-            $el['title'] = $data[0];
-            $el['content'] = $data[1];
-            $el['author'] = $data[2];
-            $el['date'] = $data[3];
-            $arrEl[] = $el;
-        }
-        fclose($fd);
-
-        return $arrEl;
-    }
-
-    public function savePrepare($title, $content, $date, $author, $img = '') {
-        $newRecord = new TBlog;
-
-        $newRecord->title = $title;
-        $newRecord->content = $content;
-        $newRecord->author = $author;
-        $newRecord->img = $img;
-        $newRecord->date = $date;
-        return $newRecord->savePrepare();
-    }
-
-    public function save($title, $content, $date, $author, $img = '') {
-        $newRecord = new TBlog;
-
-        $newRecord->title = $title;
-        $newRecord->content = $content;
-        $newRecord->author = $author;
-        $newRecord->img = $img;
-        $newRecord->date = $date;
-        return $newRecord->save();
+    public function saveBlog($title, $content, $date, $author, $img = '') {
+        $this->title = $title;
+        $this->content = $content;
+        $this->author = $author;
+        $this->img = $img;
+        $this->date = $date;
+        return parent::save();
     }
 
     public function saveImage($file) {

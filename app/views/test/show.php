@@ -10,32 +10,8 @@ if (!empty($vars)) {
 }
 ?>
 
-<script>
-    function foo() {
-        $.ajax({
-            url: "1.php", //the page containing php script
-            type: "POST", //request type
-            success: function(result) {
-                alert(result);
-            }
-        });
-    }
-</script>
 <form name="form" action="/website/test/show" method="post">
 
-    <p>
-        ФИО:
-        <input name="FIO" class="required" id="FIO" maxlength="50" size="50" type="text">
-    </p>
-    <select name="group">
-        <optgroup label="Is">
-            <option value="IS-1">IS-1</option>
-            <option value="IS-2">IS-2</option>
-        </optgroup>
-        <optgroup label="PIN">
-            <option value="PIN-1">PIN-1</option>
-        </optgroup>
-    </select>
     <br>
     <br>
     <div style="border: 2px solid rgb(177, 5, 5); padding: 5px;">
@@ -75,7 +51,7 @@ if (!empty($vars)) {
 
 <button type="button" onclick="location='/website/test/show?link'">Show history</button>
 <?
-if (isset($_GET["link"])) {
+if (isset($_GET["link"]) && $vars["history"]) {
     foreach ($vars["history"] as $value) {
         echo "<p>ФИО: " . $value->name . "</p>";
         echo "<p>Какой формат страницы является наименьшим?: " . $value->answer1 . "</p>";

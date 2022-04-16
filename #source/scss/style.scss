@@ -5,7 +5,39 @@ $SmallScreenSize: 360px;
 	max-height: $h;
 }
 
+#registration,
+#authorization {
+	width: 100vw;
+	height: 50vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	a {
+		font-weight: bold;
+		text-decoration: none;
+	}
+	input {
+		width: 400px;
+		border: unset;
+		border-bottom: 2px solid #e3e3e3;
+		outline: none;
+	}
+
+	.button {
+		width: 404px;
+		background: #e3e3e3;
+		border: unset;
+		cursor: pointer;
+	}
+	p {
+		text-align: center;
+	}
+}
+
 .block {
+	display: flex;
 	outline: 2px solid #000;
 }
 

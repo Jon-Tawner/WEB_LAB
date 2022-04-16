@@ -2,14 +2,12 @@
 
 namespace app\models;
 
-use app\models\tables\PhotoAlbum as TPhotoAlbum;
+use app\core\BaseActiveRecord;
 
-class PhotoAlbum
-{
-    public $table;
-
-    function __construct()
-    {
-        $this->table = new TPhotoAlbum;
-    }
+class PhotoAlbum extends BaseActiveRecord {
+    public $tablename = 'photo';
+    public $id;
+    public $name;
+    public $file;
+    public $alt;
 }

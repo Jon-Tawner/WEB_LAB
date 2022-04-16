@@ -1,4 +1,49 @@
+#registration,
+#authorization {
+  width: 100vw;
+  height: 50vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+#registration a,
+#authorization a {
+  font-weight: bold;
+  text-decoration: none;
+}
+#registration input,
+#authorization input {
+  width: 400px;
+  border: unset;
+  border-bottom: 2px solid #e3e3e3;
+  outline: none;
+}
+#registration .button,
+#authorization .button {
+  width: 404px;
+  background: #e3e3e3;
+  border: unset;
+  cursor: pointer;
+}
+#registration p,
+#authorization p {
+  text-align: center;
+}
+
 .block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   outline: 2px solid #000;
 }
 
