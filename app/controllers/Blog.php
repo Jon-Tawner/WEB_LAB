@@ -9,7 +9,7 @@ class Blog extends Controller {
         $lenPage = 2;
         $vars = array();
 
-        $vars["page"] = isset($_GET["page"]) ? $this->setPage($_GET["page"], $lenPage) : 0;
+        $vars["page"] = isset($_GET["page"]) ? $this->setPage($_GET["page"], $lenPage) : 1;
         $firsElementPage = ($vars["page"] - 1) * $lenPage;
 
         $vars['reсords'] = $this->model->getRecords($firsElementPage, $lenPage, "ORDER BY date DESC");
