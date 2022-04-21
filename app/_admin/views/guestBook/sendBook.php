@@ -1,4 +1,4 @@
-<form name="form" action="/website/guestBook/sendBook" method="post" enctype="multipart/form-data">
+<form name="form" action="/website/GuestBook/sendBook" method="post" enctype="multipart/form-data">
     Выберите файл: <input type="file" name="file">
     <br>
     <br>

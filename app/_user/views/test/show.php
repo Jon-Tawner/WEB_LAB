@@ -10,7 +10,7 @@ if (!empty($vars)) {
 }
 ?>
 
-<form name="form" action="/website/test/show" method="post">
+<form name="form" action="/website/Test/show" method="post">
 
     <br>
     <br>

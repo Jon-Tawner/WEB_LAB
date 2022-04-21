@@ -1,4 +1,4 @@
-<form name="form" action="/website/guestBook/show" method="post">
+<form name="form" action="/website/GuestBook/show" method="post">
     <p>
         ФИО:
         <input name="FIO" maxlength="50" size="50" type="text">
