@@ -1,7 +1,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-$pages = require 'app/lib/route.php';
+$pages = require 'app/_admin/lib/route.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,13 +23,10 @@ $pages = require 'app/lib/route.php';
 <body>
     <header>
         <h1 id="title">
-            <? if (isset($_SESSION['user'])) : ?>
-                <?= "Привет " . $_SESSION['user']['name'] . '!'; ?>
-            <? endif ?>
+            <?= "\tАдминистратор - " . $_SESSION['user']['name']; ?>
             <div class='date-time'></div>
-            <br>
             <p style="text-align:center;"><?= $title; ?></p>
-            <p style="text-align:center;"><a href="/website/Account/authorization"><? echo isset($_SESSION['user']) ? 'Выйти' : 'Войти' ?></a></p>
+            <p style="text-align:center;"><a href="/website/Account/authorization">Выйти</a></p>
         </h1>
         <nav id='nav'>
             <ul>
@@ -54,9 +51,7 @@ $pages = require 'app/lib/route.php';
                 </div>
             </div>
         </div>
-
     </header>
-
     <?php
     if (!empty($err)) {
         foreach ($err as $key1 => $value1) {

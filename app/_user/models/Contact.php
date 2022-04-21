@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\_user\models;
 
 use app\validators\FormValidation;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace  app\_user\controllers;
 
 use app\core\Controller;
 
@@ -11,9 +11,12 @@ class GuestBook extends Controller {
 
         $vars = $this->parseRecords($vars);
 
+        if (!empty($_POST))
+            $this->sendMessage();
+
         $vars = array_reverse($vars);
 
-        $this->view->render('Гостевая книга', $vars);
+        $this->view->render('Гостевая книга', $vars, $this->model->validation->Errors);
     }
 
 
@@ -30,5 +33,11 @@ class GuestBook extends Controller {
             $records[$key] = $arr;
         }
         return $records;
+    }
+
+    public function sendMessage() {
+        $this->model->validate_show_Action();
+        if (empty($this->model->validation->Errors))
+            $this->model->saveMessage();
     }
 }

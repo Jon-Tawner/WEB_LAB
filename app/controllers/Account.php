@@ -32,7 +32,7 @@ class Account extends Controller {
         if (!empty($_POST)) {
             if ($this->model->existsUser($_POST["login"], $_POST["password"])) {
                 if ($this->isAdmin())
-                    $_SESSION['isAdmin'] = 1;
+                    $_SESSION['user']['isAdmin'] = 1;
                 $this->view->redirect("http://localhost/website/Main/show");
             } else {
                 $vars["errors"] = ["User not found" => "Не удаётся найти пользователя"];

@@ -1,7 +1,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-$pages = require 'app/lib/route.php';
+$pages = require 'app/_user/lib/route.php';
 ?>
 
 <!DOCTYPE html>

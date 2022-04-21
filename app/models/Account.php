@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\models\validators\FormValidation;
+use app\validators\FormValidation;
 use app\core\BaseActiveRecord;
 use PDO;
 
