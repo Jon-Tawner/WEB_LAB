@@ -4,7 +4,7 @@ namespace  app\_admin\models;
 
 use app\core\BaseActiveRecord;
 
-class AdminViewingHistory extends BaseActiveRecord {
+class ViewingHistory extends BaseActiveRecord {
     public $tablename = 'statistics';
     public $id;
     public $date;

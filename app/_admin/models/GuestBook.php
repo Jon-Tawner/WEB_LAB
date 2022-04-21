@@ -4,7 +4,7 @@ namespace  app\_admin\models;
 
 use app\validators\FormValidation;
 
-class AdminGuestBook {
+class GuestBook {
     public $path = "public/files/messages.inc.txt";
     public $file;
     public $validation;

@@ -4,7 +4,7 @@ namespace app\_admin\controllers;
 
 use app\core\Controller;
 
-class AdminMain extends Controller {
+class Main extends Controller {
 
     public function show_Action() {
 

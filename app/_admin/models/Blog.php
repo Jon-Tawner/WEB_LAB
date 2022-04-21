@@ -5,7 +5,7 @@ namespace  app\_admin\models;
 use app\validators\FormValidation;
 use app\core\BaseActiveRecord;
 
-class AdminBlog extends BaseActiveRecord {
+class Blog extends BaseActiveRecord {
     public $validation;
 
     public $tablename = 'blog';

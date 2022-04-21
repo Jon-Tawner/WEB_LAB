@@ -7,8 +7,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 class Router {
 
     protected $route = [];
-    public $additional_path = '';
-    public $class_prefix = '';
 
     public function __construct() {
         $this->route['controller'] = isset($_REQUEST["controller"]) ? $_REQUEST["controller"] : "Main";
@@ -22,8 +20,8 @@ class Router {
             View::redirect("/website/Main/show");
 
         $this->setUserPrefix();
-        $this->route['controller_path'] = "app\\{$this->additional_path}controllers\\{$this->class_prefix}{$this->route['controller']}";
-        $this->route['model_path'] = "app\\{$this->additional_path}models\\{$this->class_prefix}{$this->route['controller']}";
+        $this->route['controller_path'] = "app\\{$this->route['additional_path']}controllers\\{$this->route['controller']}";
+        $this->route['model_path'] = "app\\{$this->route['additional_path']}models\\{$this->route['controller']}";
 
         $this->run();
     }
@@ -58,15 +56,11 @@ class Router {
     }
 
     public function setUserPrefix() {
-        if (isset($_SESSION['user']['isAdmin'])) {
-            $this->additional_path = '_admin\\';
-            $this->class_prefix = 'Admin';
-        } elseif (isset($_SESSION['user'])) {
-            $this->additional_path = '_user\\';
-            $this->class_prefix = '';
-        } else {
-            $this->additional_path = '';
-            $this->class_prefix = '';
-        }
+        if (isset($_SESSION['user']['isAdmin']))
+            $this->route['additional_path'] = '_admin\\';
+        elseif (isset($_SESSION['user']))
+            $this->route['additional_path'] = '_user\\';
+        else
+            $this->route['additional_path'] = '';
     }
 }

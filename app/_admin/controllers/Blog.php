@@ -4,7 +4,7 @@ namespace  app\_admin\controllers;
 
 use app\core\Controller;
 
-class AdminBlog extends Controller {
+class Blog extends Controller {
     public function show_Action() {
         $lenPage = 2;
         $vars = array();

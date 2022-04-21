@@ -4,7 +4,7 @@ namespace  app\_admin\controllers;
 
 use app\core\Controller;
 
-class AdminGuestBook extends Controller {
+class GuestBook extends Controller {
 
     public function show_Action() {
         $vars = $this->model->getFileText();
