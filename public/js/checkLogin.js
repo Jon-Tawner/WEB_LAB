@@ -1,0 +1,1 @@
+function isExists(e){var t=new XMLHttpRequest;t.onreadystatechange=()=>{4==t.readyState&&200==t.status&&""!=t.responseText&&alert(t.responseText)},t.open("POST","/website/Account/checkLogin"),t.setRequestHeader("Content-type","text/plain"),t.send(e)}

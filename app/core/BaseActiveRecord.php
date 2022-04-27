@@ -28,8 +28,10 @@ class BaseActiveRecord {
 
     public function getCount() {
         $count = $this->pdo->query("SELECT COUNT(*) FROM " . $this->tablename)->fetch();
-        $count = (int)$count[0];
-        return $count;
+        if (!$count)
+            return null;
+        else
+            return $count[0];
     }
 
     public function getData() {
@@ -54,9 +56,8 @@ class BaseActiveRecord {
         $stmt = $this->pdo->query($sql);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!$rows) {
+        if (!$rows)
             return null;
-        }
 
         $ar_objs = array();
         foreach ($rows as $row) {

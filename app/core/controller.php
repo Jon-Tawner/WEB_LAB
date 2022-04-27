@@ -8,7 +8,7 @@ use app\tables\Statistics;
 use app\core\View;
 
 abstract class Controller {
-    public $tableStatistic;
+    private $tableStatistic;
     public $model;
     public $view;
     public $route;
@@ -16,11 +16,11 @@ abstract class Controller {
     public function __construct($route) {
         $this->route = $route;
         $this->view = new View($route);
-        if (class_exists($route['model_path']))
-            $this->model = new $route['model_path'];
+        if (class_exists($route['model_file']))
+            $this->model = new $route['model_file'];
 
 
-        if (isset($_SESSION['user']) && !isset($_SESSION['user']['isAdmin'])) {
+        if ($this->route['user'] == '_user') {
             $this->tableStatistic = new Statistics;
             $this->tableStatistic->saveStatistic($route['controller'] . '/' . $route['action']);
         }

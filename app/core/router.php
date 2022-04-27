@@ -9,58 +9,55 @@ class Router {
     protected $route = [];
 
     public function __construct() {
-        $this->route['controller'] = isset($_REQUEST["controller"]) ? $_REQUEST["controller"] : "Main";
-        $this->route['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : "show";
-
-        if ($this->route['controller'] == 'Account') {
-            if (isset($_SESSION['user']))
-                unset($_SESSION['user']);
-        } else
-            if (!$this->isPageExistsForUser($this->route['controller']))
-            View::redirect("/website/Main/show");
-
-        $this->setUserPrefix();
-        $this->route['controller_path'] = "app\\{$this->route['additional_path']}controllers\\{$this->route['controller']}";
-        $this->route['model_path'] = "app\\{$this->route['additional_path']}models\\{$this->route['controller']}";
-
+        $this->setRoute();
         $this->run();
     }
 
     public function run() {
-        if (class_exists($this->route['controller_path'])) {
-            $action = $this->route['action'] . '_Action';
-            if (method_exists($this->route['controller_path'], $action)) {
-                $controller = new $this->route['controller_path']($this->route);
-                $controller->$action();
-            } else {
-                echo "<script>alert(\"Не найден экшен: $action\");</script>";
-                View::errorCode(404);
-            }
+        $action = $this->route['action'] . '_Action';
+        if (method_exists($this->route['controller_file'], $action)) {
+            $controller = new  $this->route['controller_file']($this->route);
+            $controller->$action();
         } else {
-            echo "<script>alert(\"Не найден контроллер: $this->route['controller_path']\");</script>";
+            echo "<script>alert(\"Не найден экшен: $action\");</script>";
             View::errorCode(404);
         }
     }
 
-    public function isPageExistsForUser($page) {
-        if (isset($_SESSION['user']['isAdmin']))
-            $pages = require 'app/_admin/lib/route.php';
-        elseif (isset($_SESSION['user']))
-            $pages = require 'app/_user/lib/route.php';
-        else
-            $pages = require 'app/lib/route.php';
-
-        if (isset($pages[$page]))
-            return true;
-        return false;
+    public function isPageExistsForUser($page, $user) {
+        $pages = require "app/{$user}/lib/route.php";
+        return isset($pages[$page]) ? true : false;
     }
 
-    public function setUserPrefix() {
+    public function setRoute() {
+        $this->route['controller'] = isset($_REQUEST["controller"]) ? $_REQUEST["controller"] : "Main";
+        $this->route['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : "show";
+
+        $user = $this->WhoYOu();
+
+        if ($this->route['controller'] == 'Account') {
+            unset($_SESSION['user']);
+            $user = '_share';
+        } else
+            if (!$this->isPageExistsForUser($this->route['controller'], $user))
+            View::redirect("/website/Main/show");
+
+        $prefix_controller = file_exists("app\\{$user}\\controllers\\{$this->route['controller']}.php") ?               $user : '_share';
+        $prefix_model = file_exists("app\\{$user}\\models\\{$this->route['controller']}.php") ?                         $user : '_share';
+        $prefix_view = file_exists("app\\{$user}\\views\\{$this->route['controller']}\\{$this->route['action']}.php") ? $user : '_share';
+
+        $this->route['user'] = $user;
+        $this->route['controller_file'] = "app\\{$prefix_controller}\\controllers\\{$this->route['controller']}";
+        $this->route['model_file'] = "app\\{$prefix_model}\\models\\{$this->route['controller']}";
+        $this->route['view_file'] = "app\\{$prefix_view}\\views\\{$this->route['controller']}\\{$this->route['action']}.php";
+    }
+
+    public function WhoYOu() {
         if (isset($_SESSION['user']['isAdmin']))
-            $this->route['additional_path'] = '_admin\\';
+            return '_admin';
         elseif (isset($_SESSION['user']))
-            $this->route['additional_path'] = '_user\\';
+            return '_user';
         else
-            $this->route['additional_path'] = '';
+            return '_share';
     }
 }
