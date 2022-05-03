@@ -39,6 +39,20 @@ class Blog extends Controller {
         $this->view->render('Загрузка сообщений блога', [], $this->model->validation->Errors);
     }
 
+    public function saveChangeBlog_Action() {
+        $this->model->validate_editor_Action();
+        if (empty($this->model->validation->Errors)) {
+            $this->model->id = $_POST["id"];
+            if ($this->saveBlog()) {
+                echo "<p>" . $_POST['date'] . "</p>";
+                echo "<p>" . $_POST['title'] . "</p>";
+                if (!empty($_FILES["img"]["name"]))
+                    echo  "<div class='photo'> <img class='img' style='height: 200px' src='/website/public/blog/img/" . $_FILES["img"]["name"] . "'></div>";
+                echo "<p>" . $_POST['content'] . "</p>";
+            }
+        }
+    }
+
     public function getDataBlog_Action() {
         echo json_encode($this->model->getDataBlog());
     }
@@ -97,9 +111,6 @@ class Blog extends Controller {
         } else
             $failure = !$this->model->saveBlog($_POST['title'], $_POST['content'], date('d.m.y h:i:s'), 'ME');
 
-        if ($failure === false)
-            echo "Данные загружены<br>";
-        else
-            echo "Данные нe загружены<br>";
+        return !$failure;
     }
 }

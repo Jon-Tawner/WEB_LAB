@@ -16,7 +16,7 @@ if (isset($vars['reсords'])) :
             <p><?= $value->content ?></p>
         </div>
         <? if (isset($_SESSION['user']['isAdmin'])) : ?>
-            <button type="button" onclick="changeBlog(this)" class="btn" name="<?= $value->id ?>">Изменить блог</button>
+            <button type="button" onclick="getDataBlog(this)" class="btn" name="<?= $value->id ?>">Изменить блог</button>
         <? endif ?>
         <button type="button" onclick="showComments(this)" name="<?= $value->id ?>">Show comments</button>
         <button type="button" onclick="hideComments(this)" name="<?= $value->id ?>">Hide comments</button>

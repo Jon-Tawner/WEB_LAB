@@ -1,34 +1,58 @@
-function changeBlog(btn) {
-    dataBlog = getDataBlog(btn.name);
-}
+/*
+Боже, Прости меня за сии ошибки в речи моей, а особливо за костыли в коде моему.
+ИХ СЛИшком МНОГО!!! 
+Речи программиста - 42 глава: 
+    Работает - Не трожь!!!!
+*/
 
-function getDataBlog(blogId) {
+let form;
+let blog;
+
+function getDataBlog(btnId) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
             blogDate = JSON.parse(xhr.responseText);
-            let blog = $("#blog" + blogId);
+            blog = $("#blog" + btnId.name);
             blog.empty();
 
-            let form = $('<form action="/website/Blog/getDataBlog" target="my-iframe" method="post">')
+            form = $('<form action="/website/Blog/saveChangeBlog" target="myFrame" method="post"  enctype="multipart/form-data">')
             blog.append(form);
 
+            let id = $('<input style="display: none" type="text" name="id" value="' + btnId.name + '">');
             let date = $('<input type="text" name="date" value="' + blogDate['date'] + '">');
-            let title = $('<input type="text" name="date" value="' + blogDate['title'] + '">');
-            let img;
-            if (blogDate['img'])
-                img = "<div class='photo'> <img class='img' style='height: 200px' src='/website/public/blog/img/" + blogDate['img'] + "'></div>";
+            let title = $('<input type="text" name="title" value="' + blogDate['title'] + '">');
+            let img = $('<p>Выберите картинку: <input type="file" name="img" ></p>');
+            let content = $('<textarea cols="50" rows="10" type="text" name="content">' + blogDate['content'] + '</textarea>');
+            let btnSave = $('<input type="button" onclick="saveChangeBlog()" value="Save change">');
 
-            let content = $('<input type="text" name="date" value="' + blogDate['content'] + '">');
-            blog.append(date);
-            blog.append(title);
-            if (img)
-                blog.append(img);
-            blog.append(content);
+            form.append(id);
+            form.append(date);
+            form.append(title);
+            form.append(img);
+            form.append(content);
+            form.append(btnSave);
         }
     }
 
     xhr.open("POST", "/website/Blog/getDataBlog");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send("id=" + blogId);
+    xhr.send("id=" + btnId.name);
+}
+
+function saveChangeBlog() {
+    let iframe = document.createElement("iframe");
+    $(iframe).attr('name', 'myFrame');
+    $(iframe).attr('style', 'display: none;');
+    $(iframe).on('load', function () {
+        let result = this.contentWindow.document.body.innerHTML//JSON.parse(this.contentWindow.document.body.innerHTML);
+        if (result != "") {
+            document.body.removeChild(iframe);
+            blog.empty();
+            blog.append(result);
+        }
+
+    })
+    document.body.append(iframe);
+    form.submit();
 }

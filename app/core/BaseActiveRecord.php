@@ -79,7 +79,7 @@ class BaseActiveRecord {
             for ($i = 0; $i < $countFields; $i++) {
                 $fields_list[] = $fields[$i] . ' = ' . $values[$i];
             }
-            $sql = "UPDATE " . $this->tablename . " SET " . join(', ', array_slice($fields_list, 1)) . " WHERE ID=" . $this->id;
+            $sql = "UPDATE " . $this->tablename . " SET " . join(', ', array_slice($fields_list, 1)) . " WHERE id=" . $this->id;
         } else {
             $sql = "INSERT INTO " . $this->tablename . " (" . join(', ', array_slice($fields, 1)) . ") VALUES(" . join(', ', array_slice($values, 1)) . ")";
         }
